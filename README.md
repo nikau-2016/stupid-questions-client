@@ -40,3 +40,12 @@ Example:
 },{```
 </code>
 </pre>
+
+## Build and run client
+
+<pre>
+<code>
+```npm run build
+npm start```
+</code>
+</pre>
