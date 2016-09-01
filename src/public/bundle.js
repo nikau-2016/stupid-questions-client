@@ -60,29 +60,29 @@
 	
 	var _reactRouter = __webpack_require__(200);
 	
-	var _reduxThunk = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-thunk\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _reduxThunk = __webpack_require__(263);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reducers = __webpack_require__(263);
+	var _reducers = __webpack_require__(264);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(267);
+	var _Header = __webpack_require__(268);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Home = __webpack_require__(268);
+	var _Home = __webpack_require__(269);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(272);
+	var _QuestionDetailsContainer = __webpack_require__(273);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducers2.default, compose(applyMiddleware(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
 	  return f;
 	}));
 	
@@ -29232,6 +29232,34 @@
 
 /***/ },
 /* 263 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+	
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+	
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+	
+	exports['default'] = thunk;
+
+/***/ },
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29242,11 +29270,11 @@
 	
 	var _redux = __webpack_require__(172);
 	
-	var _questions = __webpack_require__(264);
+	var _questions = __webpack_require__(265);
 	
 	var _questions2 = _interopRequireDefault(_questions);
 	
-	var _question = __webpack_require__(266);
+	var _question = __webpack_require__(267);
 	
 	var _question2 = _interopRequireDefault(_question);
 	
@@ -29258,7 +29286,7 @@
 	});
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29274,14 +29302,14 @@
 	  return state;
 	};
 	
-	var _initialQuestions = __webpack_require__(265);
+	var _initialQuestions = __webpack_require__(266);
 	
 	var _initialQuestions2 = _interopRequireDefault(_initialQuestions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29325,7 +29353,7 @@
 	exports.default = initialQuestions;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29347,7 +29375,7 @@
 	};
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29389,7 +29417,7 @@
 	});
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29402,17 +29430,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuestionList = __webpack_require__(269);
+	var _QuestionList = __webpack_require__(270);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
-	var _AddQuestion = __webpack_require__(270);
+	var _AddQuestion = __webpack_require__(271);
 	
 	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
 	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(271);
+	var _actions = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29444,7 +29472,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29496,7 +29524,7 @@
 	});
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29543,7 +29571,7 @@
 	});
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29560,7 +29588,7 @@
 	}
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29569,7 +29597,7 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(273);
+	var _QuestionDetails = __webpack_require__(274);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
@@ -29589,7 +29617,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29602,7 +29630,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(274);
+	var _Question = __webpack_require__(275);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
@@ -29620,7 +29648,7 @@
 	});
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
