@@ -1,6 +1,6 @@
 module.exports = {
   entry: './src/index.js',
-  output: 'bundle.js',
+  output: './src/public/bundle.js',
   module: {
     loaders: [
       {loader: 'babel-loader', test: /\.jsx?$/, exclude: 'node_modules'}
