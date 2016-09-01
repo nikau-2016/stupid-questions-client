@@ -8,7 +8,7 @@
     "start": "node ./src/server/index.js",
     "build": "webpack ./src/public/bundle.js",
     "devserver": "webpack-dev-server --hot --inline",
-    "server": "node ./src/server/index.js",
+    "server": "node ./src/server/index.js"
   },
   "repository": {
     "type": "git",
