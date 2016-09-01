@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "tape 'tests/**/*.test.js' -r babel-register | tap-spec",
-    "start": "webpack-dev-server --hot --inline",
+    "start": "node ./src/server/index.js",
     "build": "webpack ./src/public/bundle.js",
-    "server": "node ./src/server/index.js"
+    "devserver": "webpack-dev-server --hot --inline",
+    "server": "node ./src/server/index.js",
+    "heroku-prebuild": "webpack ./src/public/bundle.js",
+    "heroku-postbuild": "node ./src/server/index.js"
   },
   "repository": {
     "type": "git",
