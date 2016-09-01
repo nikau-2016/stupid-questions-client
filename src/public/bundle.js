@@ -60,25 +60,31 @@
 	
 	var _reactRouter = __webpack_require__(200);
 	
-	var _reducers = __webpack_require__(263);
+	var _reduxThunk = __webpack_require__(263);
+	
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+	
+	var _reducers = __webpack_require__(264);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(267);
+	var _Header = __webpack_require__(268);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _QuestionListContainer = __webpack_require__(268);
+	var _Home = __webpack_require__(269);
 	
-	var _QuestionListContainer2 = _interopRequireDefault(_QuestionListContainer);
+	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(271);
+	var _QuestionDetailsContainer = __webpack_require__(273);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducers2.default, window.devToolsExtension && window.devToolsExtension());
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	  return f;
+	}));
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  _reactDom2.default.render(_react2.default.createElement(
@@ -90,7 +96,7 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { component: _Header2.default },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _QuestionListContainer2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/questiondetails', component: _QuestionDetailsContainer2.default })
 	      )
 	    )
@@ -29226,6 +29232,34 @@
 
 /***/ },
 /* 263 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+	
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+	
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+	
+	exports['default'] = thunk;
+
+/***/ },
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29236,11 +29270,11 @@
 	
 	var _redux = __webpack_require__(172);
 	
-	var _questions = __webpack_require__(264);
+	var _questions = __webpack_require__(265);
 	
 	var _questions2 = _interopRequireDefault(_questions);
 	
-	var _question = __webpack_require__(266);
+	var _question = __webpack_require__(267);
 	
 	var _question2 = _interopRequireDefault(_question);
 	
@@ -29252,7 +29286,7 @@
 	});
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29268,14 +29302,14 @@
 	  return state;
 	};
 	
-	var _initialQuestions = __webpack_require__(265);
+	var _initialQuestions = __webpack_require__(266);
 	
 	var _initialQuestions2 = _interopRequireDefault(_initialQuestions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29298,28 +29332,28 @@
 	  id: 1,
 	  title: "what is javascript?",
 	  content: "I don't know what Javascript is! ohmigod!",
-	  created: ""
+	  created: "gfd"
 	}, {
 	  id: 2,
 	  title: "what is the command for git push?",
 	  content: "I'm trying to push and I forgot how?!",
-	  created: ""
+	  created: "gfd"
 	}, {
 	  id: 3,
 	  title: "How do I make a repo?",
 	  content: "I'm trying to make a repo but can't see how?",
-	  created: ""
+	  created: "gfd"
 	}, {
 	  id: 4,
 	  title: "What is CSS?",
 	  content: "What does it stand for? How do I do it??",
-	  created: ""
+	  created: "gfd"
 	}, {}];
 	
 	exports.default = initialQuestions;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29341,7 +29375,7 @@
 	};
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29383,7 +29417,7 @@
 	});
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29392,15 +29426,34 @@
 	  value: true
 	});
 	
-	var _QuestionList = __webpack_require__(269);
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _QuestionList = __webpack_require__(270);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
+	var _AddQuestion = __webpack_require__(271);
+	
+	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
+	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(270);
+	var _actions = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Home = function Home(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_AddQuestion2.default, { onClickQuestion: function onClickQuestion(evt) {
+	        return console.log(evt);
+	      } }),
+	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick })
+	  );
+	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
@@ -29416,10 +29469,10 @@
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_QuestionList2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29449,7 +29502,7 @@
 	    var questionList = this.props.questions.map(function (elem) {
 	      return _react2.default.createElement(
 	        'div',
-	        { key: elem.id },
+	        { key: Number(elem.id) },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { id: elem.id, onClick: _this.props.onLinkClick, to: '/questiondetails' },
@@ -29471,7 +29524,54 @@
 	});
 
 /***/ },
-/* 270 */
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: "AddQuestion",
+	
+	  props: {
+	    onClickQuestion: _react2.default.PropTypes.func.isRequired
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "answer-form" },
+	      _react2.default.createElement(
+	        "form",
+	        null,
+	        _react2.default.createElement(
+	          "label",
+	          { htmlFor: "question" },
+	          "Add a question"
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement("textarea", { type: "text", name: "question" }),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "button",
+	          { type: "button", onClick: this.props.onClickQuestion },
+	          "Add question"
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 272 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29488,7 +29588,7 @@
 	}
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29497,7 +29597,7 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(272);
+	var _QuestionDetails = __webpack_require__(274);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
@@ -29517,7 +29617,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29530,7 +29630,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(273);
+	var _Question = __webpack_require__(275);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
@@ -29548,7 +29648,7 @@
 	});
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
