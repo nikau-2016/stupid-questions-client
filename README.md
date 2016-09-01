@@ -10,25 +10,26 @@ Server: Erwin, Sach, Siobhan
 Full-stack: Justin, Prem
 
 ##Creating seed dummy Data- Client side
-
 Seeded dummy data for asking a question and viewing its contents:
-React Redux 
+# React Redux 
 Can be found in src > reducers folder > initialQuestions 
 
-Example: 
-```const initialQuestions = [{
+#Example: 
+
+#```const initialQuestions = [{
   id:1,
   title:"what is javascript?",
   content:"I don't know what Javascript is! ohmigod!",
   created:""
 },{```
 
-Seeded dummy data for question answers: 
-React Redux 
-Can be found in src > reducers folder > initialAnswers 
-Example:
+#Seeded dummy data for question answers: 
+#React Redux 
+#Can be found in src > reducers folder > initialAnswers 
 
-```const initialAnswers= [{
+#Example:
+
+#```const initialAnswers= [{
   id:1,
   content:"A programming language",
   created:"",
