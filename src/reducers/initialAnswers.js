@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const intialAnswers = [{
+const initialAnswers= [{
   id:1,
   content:"A programming language",
   created:"",
@@ -22,4 +22,4 @@ const intialAnswers = [{
   created:"",
   question_id:4
 }]
-export default intialAnswers
+export default initialAnswers
