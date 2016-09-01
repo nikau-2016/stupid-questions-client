@@ -7,7 +7,7 @@ module.exports = {
     ]
   },
   resolve: {
-    exstensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   devtool: 'source-map'
 }
