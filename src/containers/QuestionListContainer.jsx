@@ -1,5 +1,6 @@
 import QuestionList from '../components/QuestionList'
 import {connect} from 'react-redux'
+import {setQuestion} from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -7,4 +8,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(QuestionList)
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onLinkClick: (evt) => {
+      dispatch(setQuestion(evt.target.id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)
