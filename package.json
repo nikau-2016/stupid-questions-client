@@ -9,7 +9,6 @@
     "build": "webpack ./src/public/bundle.js",
     "devserver": "webpack-dev-server --hot --inline",
     "server": "node ./src/server/index.js",
-    "heroku-postbuild": "webpack ./src/public/bundle.js"
   },
   "repository": {
     "type": "git",
