@@ -1,10 +1,8 @@
-const initialState = {
-  id: 3,
-  title: "Blah",
-  content: " BLABLABLABLAB !",
-  created: "August the 3rd 2013"
-}
-
-export default function (state = initialState, action) {
-  return state
+export default function (state = 0, action) {
+  switch(action.type){
+    case 'SET_QUESTION':
+      return action.id
+    default:
+      return state
+  }
 }

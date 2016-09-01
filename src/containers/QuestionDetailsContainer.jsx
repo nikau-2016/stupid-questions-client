@@ -1,10 +1,13 @@
-import Question from '../components/Question'
+import QuestionDetails from '../components/QuestionDetails'
 import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
+  const question = state.questions.find(elem => {
+    return String(elem.id) === state.question
+  })
   return {
-    question: state.question
+    question
   }
 }
 
-export default connect(mapStateToProps)(Question)
+export default connect(mapStateToProps)(QuestionDetails)
