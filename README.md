@@ -8,13 +8,13 @@ Git: Kamon
 Client: Kamon, Mandy, Jana
 Server: Erwin, Sach, Siobhan
 Full-stack: Justin, Prem
-
-1.Creating seed dummy Data- Client side
-##Seeded dummy data for asking a question and viewing its contents:
-..#React Redux 
-..#Can be found in src > reducers folder > initialQuestions 
-
----Example: 
+<enter>
+##Creating seed dummy Data- Client side
+<ul>
+1.Created Seed dummy data for asking a question and viewing its contents:</li>
+<li>React Redux</li>
+<li>Can be found in src > reducers folder > initialQuestions </li>
+Example: 
 <pre>
 <code>
 ```const initialQuestions = [{
@@ -25,10 +25,11 @@ Full-stack: Justin, Prem
 },{```
 </pre>
 </code>
-2.Created seeded dummy data for question answers: 
-..#React Redux 
-..#Can be found in src > reducers folder > initialAnswers 
----Example:
+<ul>
+2.Created seed dummy data for question answers: 
+<li>React Redux </li>
+<li>Can be found in src > reducers folder > initialAnswers </li>
+Example:
 <pre>
 <code>
 ```const initialAnswers= [{
