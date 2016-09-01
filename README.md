@@ -33,5 +33,4 @@ Example:
   content:"A programming language",
   created:"",
   question_id:1
-},{
-```
+},{```
