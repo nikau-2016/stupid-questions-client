@@ -17,12 +17,12 @@ Full-stack: Justin, Prem
 Example: 
 <pre>
 <code>
-```const initialQuestions = [{
+const initialQuestions = [{
   id:1,
   title:"what is javascript?",
   content:"I don't know what Javascript is! ohmigod!",
   created:""
-},{```
+},{
 </code>
 </pre>
 <ul>
@@ -32,12 +32,12 @@ Example:
 Example:
 <pre>
 <code>
-```const initialAnswers= [{
+const initialAnswers= [{
   id:1,
   content:"A programming language",
   created:"",
   question_id:1
-},{```
+},{
 </code>
 </pre>
 
