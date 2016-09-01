@@ -23,8 +23,8 @@ Example:
   content:"I don't know what Javascript is! ohmigod!",
   created:""
 },{```
-</pre>
 </code>
+</pre>
 <ul>
 2.Created seed dummy data for question answers: 
 <li>React Redux </li>
@@ -38,5 +38,5 @@ Example:
   created:"",
   question_id:1
 },{```
-</pre>
 </code>
+</pre>
