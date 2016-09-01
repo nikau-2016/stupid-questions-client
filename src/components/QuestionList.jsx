@@ -9,7 +9,7 @@ export default React.createClass({
   render () {
     const questionList = this.props.questions.map((elem) => {
       return (
-        <div key={elem.id}>
+        <div key={Number(elem.id)}>
           <Link id={elem.id} onClick={this.props.onLinkClick} to='/questiondetails'>{elem.title}</Link>
           <p>{elem.created}</p>
         </div>
