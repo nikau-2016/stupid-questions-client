@@ -42,11 +42,12 @@ Example:
 </pre>
 
 <enter>
+
 ## Build and run client
 
 <pre>
 <code>
-```npm run build
-npm start```
+npm run build
+npm start
 </code>
 </pre>
