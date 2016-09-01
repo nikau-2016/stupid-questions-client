@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 export default React.createClass({
   props: {
@@ -8,7 +9,7 @@ export default React.createClass({
     const questionList = this.props.questions.map((elem) => {
       return (
         <div key={elem.id}>
-          <h3>{elem.title}</h3>
+          <Link to='/questiondetails'>{elem.title}</Link>
           <p>{elem.created}</p>
         </div>
       )
