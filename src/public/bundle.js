@@ -60,6 +60,10 @@
 	
 	var _reactRouter = __webpack_require__(200);
 	
+	var _reduxThunk = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-thunk\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+	
 	var _reducers = __webpack_require__(263);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
@@ -78,7 +82,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducers2.default, window.devToolsExtension && window.devToolsExtension());
+	var store = (0, _redux.createStore)(_reducers2.default, compose(applyMiddleware(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+	  return f;
+	}));
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  _reactDom2.default.render(_react2.default.createElement(
