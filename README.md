@@ -41,6 +41,7 @@ Example:
 </code>
 </pre>
 
+<enter>
 ## Build and run client
 
 <pre>
