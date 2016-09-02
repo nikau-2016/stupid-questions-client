@@ -32,6 +32,12 @@ export const clearNewQuestion = (content) => {
     type: 'CLEAR_NEW_QUESTION'
   }
 }
+export const retrievalError = (error) => {
+  return {
+    type: 'RETRIEVAL_ERROR',
+    error: error
+  }
+}
 
 export const retrieveQuestions = () => {
   return (dispatch) => {
@@ -39,7 +45,7 @@ export const retrieveQuestions = () => {
       .get(`http://localhost:3000/v1/questions`)
       .end((err, res) => {
         if (err) {
-          console.error(err.message)
+          dispatch(retrievalError(err.message))
           return
         }
         dispatch(setQuestions(res.body.data))
@@ -56,7 +62,7 @@ export function addNewQuestion () {
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
-          console.error(err.message)
+          dispatch(retrievalError(err.message))
           return
         }
         dispatch(retrieveQuestions())

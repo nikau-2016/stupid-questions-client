@@ -68,23 +68,27 @@
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(268);
+	var _Header = __webpack_require__(269);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Home = __webpack_require__(269);
+	var _Home = __webpack_require__(270);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(278);
+	var _QuestionDetailsContainer = __webpack_require__(279);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
+	
+	var _actions = __webpack_require__(273);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
 	  return f;
 	}));
+	
+	store.dispatch((0, _actions.retrieveQuestions)());
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  _reactDom2.default.render(_react2.default.createElement(
@@ -28899,15 +28903,19 @@
 	
 	var _redux = __webpack_require__(172);
 	
-	var _questions = __webpack_require__(265);
+	var _error = __webpack_require__(265);
+	
+	var _error2 = _interopRequireDefault(_error);
+	
+	var _questions = __webpack_require__(266);
 	
 	var _questions2 = _interopRequireDefault(_questions);
 	
-	var _question = __webpack_require__(266);
+	var _question = __webpack_require__(267);
 	
 	var _question2 = _interopRequireDefault(_question);
 	
-	var _newQuestion = __webpack_require__(267);
+	var _newQuestion = __webpack_require__(268);
 	
 	var _newQuestion2 = _interopRequireDefault(_newQuestion);
 	
@@ -28916,11 +28924,34 @@
 	exports.default = (0, _redux.combineReducers)({
 	  questions: _questions2.default,
 	  question: _question2.default,
-	  newQuestion: _newQuestion2.default
+	  newQuestion: _newQuestion2.default,
+	  error: _error2.default
 	});
 
 /***/ },
 /* 265 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RETRIEVAL_ERROR':
+	      return action.error;
+	    default:
+	      return state;
+	  }
+	};
+
+/***/ },
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28942,7 +28973,7 @@
 	};
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28964,7 +28995,7 @@
 	};
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28995,7 +29026,7 @@
 	};
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29037,7 +29068,7 @@
 	});
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29050,17 +29081,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuestionList = __webpack_require__(270);
+	var _QuestionList = __webpack_require__(271);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
-	var _AddQuestion = __webpack_require__(271);
+	var _AddQuestion = __webpack_require__(272);
 	
 	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
 	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(272);
+	var _actions = __webpack_require__(273);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29068,15 +29099,25 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_AddQuestion2.default, { newQuestion: props.newQuestion, onClickQuestion: props.onClickQuestion, onChangeTitle: props.onChangeTitle, onChangeContent: props.onChangeContent }),
-	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick, getInitialQuestions: props.getInitialQuestions })
+	    _react2.default.createElement(_AddQuestion2.default, {
+	      newQuestion: props.newQuestion,
+	      onClickQuestion: props.onClickQuestion,
+	      onChangeTitle: props.onChangeTitle,
+	      onChangeContent: props.onChangeContent,
+	      error: props.error }),
+	    _react2.default.createElement(_QuestionList2.default, {
+	      questions: props.questions,
+	      onLinkClick: props.onLinkClick,
+	      getInitialQuestions: props.getInitialQuestions,
+	      error: props.error })
 	  );
 	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    questions: state.questions,
-	    newQuestion: state.newQuestion
+	    newQuestion: state.newQuestion,
+	    error: state.error
 	  };
 	};
 	
@@ -29103,7 +29144,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29126,7 +29167,8 @@
 	  props: {
 	    questions: _react2.default.PropTypes.array.isRequired,
 	    onLinkClick: _react2.default.PropTypes.func.isRequired,
-	    getInitialQuestions: _react2.default.PropTypes.func.isRequired
+	    getInitialQuestions: _react2.default.PropTypes.func.isRequired,
+	    error: _react2.default.PropTypes.string.isRequired
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.props.getInitialQuestions();
@@ -29153,13 +29195,20 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'question-list' },
-	      questionList
+	      questionList,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        ' ',
+	        this.props.error,
+	        ' '
+	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29179,6 +29228,7 @@
 	
 	  props: {
 	    newQuestion: _react2.default.PropTypes.object.isRequired,
+	    error: _react2.default.PropTypes.string.isRequired,
 	    onClickQuestion: _react2.default.PropTypes.func.isRequired,
 	    onChangeTitle: _react2.default.PropTypes.func.isRequired,
 	    onChangeContent: _react2.default.PropTypes.func.isRequired
@@ -29211,13 +29261,20 @@
 	          { type: "button", onClick: this.props.onClickQuestion },
 	          "Add question"
 	        )
+	      ),
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        " ",
+	        this.props.error,
+	        " "
 	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29225,10 +29282,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.retrieveQuestions = exports.clearNewQuestion = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.setQuestion = undefined;
+	exports.retrieveQuestions = exports.retrievalError = exports.clearNewQuestion = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.setQuestion = undefined;
 	exports.addNewQuestion = addNewQuestion;
 	
-	var _superagent = __webpack_require__(273);
+	var _superagent = __webpack_require__(274);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -29266,12 +29323,18 @@
 	    type: 'CLEAR_NEW_QUESTION'
 	  };
 	};
+	var retrievalError = exports.retrievalError = function retrievalError(error) {
+	  return {
+	    type: 'RETRIEVAL_ERROR',
+	    error: error
+	  };
+	};
 	
 	var retrieveQuestions = exports.retrieveQuestions = function retrieveQuestions() {
 	  return function (dispatch) {
-	    _superagent2.default.get('http://s2pid-kweschinz.herokuapp.com/v1/questions').end(function (err, res) {
+	    _superagent2.default.get('http://localhost:3000/v1/questions').end(function (err, res) {
 	      if (err) {
-	        console.error(err.message);
+	        dispatch(retrievalError(err.message));
 	        return;
 	      }
 	      dispatch(setQuestions(res.body.data));
@@ -29282,9 +29345,9 @@
 	function addNewQuestion() {
 	  return function (dispatch, getState) {
 	    var newQuestion = Object.assign({}, getState().newQuestion, { created: 'FAKE DATE' });
-	    _superagent2.default.post('http://s2pid-kweschinz.herokuapp.com/v1/questions').send(newQuestion).set('Accept', 'application/json').end(function (err, res) {
+	    _superagent2.default.post('http://localhost:3000/v1/questions').send(newQuestion).set('Accept', 'application/json').end(function (err, res) {
 	      if (err) {
-	        console.error(err.message);
+	        dispatch(retrievalError(err.message));
 	        return;
 	      }
 	      dispatch(retrieveQuestions());
@@ -29294,7 +29357,7 @@
 	}
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29311,9 +29374,9 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(274);
-	var requestBase = __webpack_require__(275);
-	var isObject = __webpack_require__(276);
+	var Emitter = __webpack_require__(275);
+	var requestBase = __webpack_require__(276);
+	var isObject = __webpack_require__(277);
 	
 	/**
 	 * Noop.
@@ -29325,7 +29388,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(277).bind(null, Request);
+	var request = module.exports = __webpack_require__(278).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -30276,7 +30339,7 @@
 
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30445,13 +30508,13 @@
 
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(276);
+	var isObject = __webpack_require__(277);
 	
 	/**
 	 * Clear previous timeout.
@@ -30798,7 +30861,7 @@
 
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports) {
 
 	/**
@@ -30817,7 +30880,7 @@
 
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -30855,7 +30918,7 @@
 
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30864,7 +30927,7 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(279);
+	var _QuestionDetails = __webpack_require__(280);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
@@ -30884,7 +30947,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30897,7 +30960,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(280);
+	var _Question = __webpack_require__(281);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
@@ -30915,7 +30978,7 @@
 	});
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

@@ -5,7 +5,8 @@ export default React.createClass({
   props: {
     questions: React.PropTypes.array.isRequired,
     onLinkClick: React.PropTypes.func.isRequired,
-    getInitialQuestions: React.PropTypes.func.isRequired
+    getInitialQuestions: React.PropTypes.func.isRequired,
+    error: React.PropTypes.string.isRequired
   },
   componentDidMount () {
     this.props.getInitialQuestions()
@@ -22,6 +23,7 @@ export default React.createClass({
     return (
       <div className="question-list">
         {questionList}
+        <p> {this.props.error} </p>
       </div>
     )
   }
