@@ -3,7 +3,7 @@ module.exports = {
   output: './src/public/bundle.js',
   module: {
     loaders: [
-      {loader: 'babel-loader', test: /\.jsx?$/, exclude: 'node_modules'}
+      {loader: 'babel-loader?cacheDirectory', test: /\.jsx?$/, exclude: /node_modules/}
     ]
   },
   resolve: {
