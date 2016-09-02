@@ -2,7 +2,7 @@ import React from 'react'
 
 export default React.createClass({
   props: {
-    onClickAnswer: React.PropTypes.func.isRequired
+    onClickSubmitAnswer: React.PropTypes.func.isRequired
   },
   render () {
     return (
@@ -10,7 +10,7 @@ export default React.createClass({
         <form>
           <label htmlFor="answer">Answer a question</label><br />
           <textarea type="text" name="question" /><br />
-          <button type="button" onClick={this.props.onClicAnswer}>Answer a question</button>
+          <button type="button" onClick={this.props.onClickSubmitAnswer}>Answer a question</button>
         </form>
       </div>
     )
