@@ -1,6 +1,4 @@
-import initialQuestions from './initialQuestions'
-
-export default function (state = initialQuestions, action) {
+export default function (state = [], action) {
   switch(action.type){
     case 'SET_QUESTIONS':
       return action.questions

@@ -9,6 +9,8 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {title: action.title})
     case 'SET_CONTENT':
       return Object.assign({}, state, {content: action.content})
+    case 'CLEAR_NEW_QUESTION':
+      return initialState
     default:
       return state
   }

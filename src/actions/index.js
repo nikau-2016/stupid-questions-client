@@ -27,6 +27,11 @@ export const changeContent = (content) => {
     content
   }
 }
+export const clearNewQuestion = (content) => {
+  return {
+    type: 'CLEAR_NEW_QUESTION'
+  }
+}
 
 export const retrieveQuestions = () => {
   return (dispatch) => {
@@ -55,6 +60,7 @@ export function addNewQuestion () {
           return
         }
         dispatch(retrieveQuestions())
+        dispatch(clearNewQuestion())
       })
   }
 }

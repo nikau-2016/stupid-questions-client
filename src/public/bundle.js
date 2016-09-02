@@ -68,15 +68,15 @@
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(269);
+	var _Header = __webpack_require__(268);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Home = __webpack_require__(270);
+	var _Home = __webpack_require__(269);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(279);
+	var _QuestionDetailsContainer = __webpack_require__(278);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
 	
@@ -28903,11 +28903,11 @@
 	
 	var _questions2 = _interopRequireDefault(_questions);
 	
-	var _question = __webpack_require__(267);
+	var _question = __webpack_require__(266);
 	
 	var _question2 = _interopRequireDefault(_question);
 	
-	var _newQuestion = __webpack_require__(268);
+	var _newQuestion = __webpack_require__(267);
 	
 	var _newQuestion2 = _interopRequireDefault(_newQuestion);
 	
@@ -28921,7 +28921,7 @@
 
 /***/ },
 /* 265 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -28930,7 +28930,7 @@
 	});
 	
 	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? _initialQuestions2.default : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
@@ -28940,59 +28940,9 @@
 	      return state;
 	  }
 	};
-	
-	var _initialQuestions = __webpack_require__(266);
-	
-	var _initialQuestions2 = _interopRequireDefault(_initialQuestions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
 /* 266 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(34);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var initialQuestions = [{
-	  id: 1,
-	  title: "what is javascript?",
-	  content: "I don't know what Javascript is! ohmigod!",
-	  created: "gfd"
-	}, {
-	  id: 2,
-	  title: "what is the command for git push?",
-	  content: "I'm trying to push and I forgot how?!",
-	  created: "gfd"
-	}, {
-	  id: 3,
-	  title: "How do I make a repo?",
-	  content: "I'm trying to make a repo but can't see how?",
-	  created: "gfd"
-	}, {
-	  id: 4,
-	  title: "What is CSS?",
-	  content: "What does it stand for? How do I do it??",
-	  created: "gfd"
-	}, {}];
-	
-	exports.default = initialQuestions;
-
-/***/ },
-/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29014,7 +28964,7 @@
 	};
 
 /***/ },
-/* 268 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29032,6 +28982,8 @@
 	      return Object.assign({}, state, { title: action.title });
 	    case 'SET_CONTENT':
 	      return Object.assign({}, state, { content: action.content });
+	    case 'CLEAR_NEW_QUESTION':
+	      return initialState;
 	    default:
 	      return state;
 	  }
@@ -29043,7 +28995,7 @@
 	};
 
 /***/ },
-/* 269 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29085,7 +29037,7 @@
 	});
 
 /***/ },
-/* 270 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29098,17 +29050,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuestionList = __webpack_require__(271);
+	var _QuestionList = __webpack_require__(270);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
-	var _AddQuestion = __webpack_require__(272);
+	var _AddQuestion = __webpack_require__(271);
 	
 	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
 	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(273);
+	var _actions = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29117,7 +29069,7 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_AddQuestion2.default, { newQuestion: props.newQuestion, onClickQuestion: props.onClickQuestion, onChangeTitle: props.onChangeTitle, onChangeContent: props.onChangeContent }),
-	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick })
+	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick, getInitialQuestions: props.getInitialQuestions })
 	  );
 	};
 	
@@ -29141,6 +29093,9 @@
 	    },
 	    onChangeContent: function onChangeContent(evt) {
 	      dispatch((0, _actions.changeContent)(evt.target.value));
+	    },
+	    getInitialQuestions: function getInitialQuestions() {
+	      dispatch((0, _actions.retrieveQuestions)());
 	    }
 	  };
 	};
@@ -29148,7 +29103,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 271 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29174,7 +29129,7 @@
 	    getInitialQuestions: _react2.default.PropTypes.func.isRequired
 	  },
 	  componentDidMount: function componentDidMount() {
-	    console.log(this.props);
+	    this.props.getInitialQuestions();
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -29204,7 +29159,7 @@
 	});
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29262,7 +29217,7 @@
 	});
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29270,10 +29225,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.retrieveQuestions = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.setQuestion = undefined;
+	exports.retrieveQuestions = exports.clearNewQuestion = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.setQuestion = undefined;
 	exports.addNewQuestion = addNewQuestion;
 	
-	var _superagent = __webpack_require__(274);
+	var _superagent = __webpack_require__(273);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -29306,6 +29261,11 @@
 	    content: content
 	  };
 	};
+	var clearNewQuestion = exports.clearNewQuestion = function clearNewQuestion(content) {
+	  return {
+	    type: 'CLEAR_NEW_QUESTION'
+	  };
+	};
 	
 	var retrieveQuestions = exports.retrieveQuestions = function retrieveQuestions() {
 	  return function (dispatch) {
@@ -29328,12 +29288,13 @@
 	        return;
 	      }
 	      dispatch(retrieveQuestions());
+	      dispatch(clearNewQuestion());
 	    });
 	  };
 	}
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29350,9 +29311,9 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(275);
-	var requestBase = __webpack_require__(276);
-	var isObject = __webpack_require__(277);
+	var Emitter = __webpack_require__(274);
+	var requestBase = __webpack_require__(275);
+	var isObject = __webpack_require__(276);
 	
 	/**
 	 * Noop.
@@ -29364,7 +29325,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(278).bind(null, Request);
+	var request = module.exports = __webpack_require__(277).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -30315,7 +30276,7 @@
 
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30484,13 +30445,13 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(277);
+	var isObject = __webpack_require__(276);
 	
 	/**
 	 * Clear previous timeout.
@@ -30837,7 +30798,7 @@
 
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports) {
 
 	/**
@@ -30856,7 +30817,7 @@
 
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -30894,7 +30855,7 @@
 
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30903,7 +30864,7 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(280);
+	var _QuestionDetails = __webpack_require__(279);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
@@ -30923,7 +30884,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30936,7 +30897,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(281);
+	var _Question = __webpack_require__(280);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
@@ -30954,7 +30915,7 @@
 	});
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

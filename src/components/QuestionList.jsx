@@ -8,7 +8,7 @@ export default React.createClass({
     getInitialQuestions: React.PropTypes.func.isRequired
   },
   componentDidMount () {
-    console.log(this.props)
+    this.props.getInitialQuestions()
   },
   render () {
     const questionList = this.props.questions.map((elem) => {
