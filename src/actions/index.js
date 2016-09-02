@@ -1,3 +1,5 @@
+import request from 'superagent'
+
 export const setQuestion = (id) => {
   return {
     type: 'SET_QUESTION',
@@ -26,23 +28,23 @@ export const changeContent = (content) => {
   }
 }
 
-// export const retrieveQuestions = () => {
-//   return (dispatch) => {
-//     request
-//       .get(`http://s2pid-kweschinz.herokuapp.com/v1/questions`)
-//       .end((err, res) => {
-//         if (err) {
-//           console.error(err.message)
-//           return
-//         }
-//         dispatch(setQuestions(res))
-//       })
-//   }
-// }
+export const retrieveQuestions = () => {
+  return (dispatch) => {
+    request
+      .get(`http://s2pid-kweschinz.herokuapp.com/v1/questions`)
+      .end((err, res) => {
+        if (err) {
+          console.error(err.message)
+          return
+        }
+        dispatch(setQuestions(res.body.data))
+      })
+  }
+}
 
 export function addNewQuestion () {
-  const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
   return (dispatch, getState) => {
+    const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
       .post(`http://s2pid-kweschinz.herokuapp.com/v1/questions`)
       .send(newQuestion)

@@ -4,7 +4,11 @@ import {Link} from 'react-router'
 export default React.createClass({
   props: {
     questions: React.PropTypes.array.isRequired,
-    onLinkClick: React.PropTypes.func.isRequired
+    onLinkClick: React.PropTypes.func.isRequired,
+    getInitialQuestions: React.PropTypes.func.isRequired
+  },
+  componentDidMount () {
+    console.log(this.props)
   },
   render () {
     const questionList = this.props.questions.map((elem) => {
