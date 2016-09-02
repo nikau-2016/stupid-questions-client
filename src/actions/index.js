@@ -36,7 +36,7 @@ export const clearNewQuestion = (content) => {
 export const retrieveQuestions = () => {
   return (dispatch) => {
     request
-      .get(`http://s2pid-kweschinz.herokuapp.com/v1/questions`)
+      .get(`http://localhost:3000/v1/questions`)
       .end((err, res) => {
         if (err) {
           console.error(err.message)
@@ -51,7 +51,7 @@ export function addNewQuestion () {
   return (dispatch, getState) => {
     const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
-      .post(`http://s2pid-kweschinz.herokuapp.com/v1/questions`)
+      .post(`http://localhost:3000/v1/questions`)
       .send(newQuestion)
       .set('Accept', 'application/json')
       .end((err, res) => {
