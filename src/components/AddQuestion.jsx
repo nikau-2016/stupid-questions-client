@@ -3,6 +3,7 @@ import React from 'react'
 export default React.createClass({
   props: {
     newQuestion: React.PropTypes.object.isRequired,
+    error: React.PropTypes.string.isRequired,
     onClickQuestion: React.PropTypes.func.isRequired,
     onChangeTitle: React.PropTypes.func.isRequired,
     onChangeContent: React.PropTypes.func.isRequired
@@ -17,6 +18,7 @@ export default React.createClass({
           <textarea type="text" name="content" value={this.props.newQuestion.content} onChange={this.props.onChangeContent} /><br />
           <button type="button" onClick={this.props.onClickQuestion}>Add question</button>
         </form>
+        <p> {this.props.error} </p>
       </div>
     )
   }

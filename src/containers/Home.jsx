@@ -7,8 +7,17 @@ import {setQuestion, setAnswerId, changeTitle, changeContent, addNewQuestion, re
 const Home = (props) => {
   return (
     <div>
-      <AddQuestion newQuestion={props.newQuestion} onClickQuestion={props.onClickQuestion} onChangeTitle={props.onChangeTitle} onChangeContent={props.onChangeContent} />
-      <QuestionList questions={props.questions} onLinkClick={props.onLinkClick} getInitialQuestions={props.getInitialQuestions}/>
+      <AddQuestion
+        newQuestion={props.newQuestion}
+        onClickQuestion={props.onClickQuestion}
+        onChangeTitle={props.onChangeTitle}
+        onChangeContent={props.onChangeContent}
+        error={props.error}/>
+      <QuestionList
+        questions={props.questions}
+        onLinkClick={props.onLinkClick}
+        getInitialQuestions={props.getInitialQuestions}
+        error={props.error}/>
     </div>
   )
 }
@@ -16,7 +25,8 @@ const Home = (props) => {
 const mapStateToProps = (state) => {
   return {
     questions: state.questions,
-    newQuestion: state.newQuestion
+    newQuestion: state.newQuestion,
+    error: state.error
   }
 }
 
