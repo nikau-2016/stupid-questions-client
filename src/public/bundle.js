@@ -68,15 +68,15 @@
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(268);
+	var _Header = __webpack_require__(269);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Home = __webpack_require__(269);
+	var _Home = __webpack_require__(270);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(273);
+	var _QuestionDetailsContainer = __webpack_require__(274);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
 	
@@ -29278,11 +29278,16 @@
 	
 	var _question2 = _interopRequireDefault(_question);
 	
+	var _newQuestion = __webpack_require__(268);
+	
+	var _newQuestion2 = _interopRequireDefault(_newQuestion);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
 	  questions: _questions2.default,
-	  question: _question2.default
+	  question: _question2.default,
+	  newQuestion: _newQuestion2.default
 	});
 
 /***/ },
@@ -29376,6 +29381,35 @@
 
 /***/ },
 /* 268 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'SET_TITLE':
+	      return Object.assign({}, state, { title: action.title });
+	    case 'SET_CONTENT':
+	      return Object.assign({}, state, { content: action.content });
+	    default:
+	      return state;
+	  }
+	};
+	
+	var initialState = {
+	  title: "",
+	  content: ""
+	};
+
+/***/ },
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29417,7 +29451,7 @@
 	});
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29430,17 +29464,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuestionList = __webpack_require__(270);
+	var _QuestionList = __webpack_require__(271);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
-	var _AddQuestion = __webpack_require__(271);
+	var _AddQuestion = __webpack_require__(272);
 	
 	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
 	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(272);
+	var _actions = __webpack_require__(273);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29448,16 +29482,15 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_AddQuestion2.default, { onClickQuestion: function onClickQuestion(evt) {
-	        return console.log(evt);
-	      } }),
+	    _react2.default.createElement(_AddQuestion2.default, { newQuestion: props.newQuestion, onClickQuestion: props.onClickQuestion, onChangeTitle: props.onChangeTitle, onChangeContent: props.onChangeContent }),
 	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick })
 	  );
 	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    questions: state.questions
+	    questions: state.questions,
+	    newQuestion: state.newQuestion
 	  };
 	};
 	
@@ -29465,6 +29498,15 @@
 	  return {
 	    onLinkClick: function onLinkClick(evt) {
 	      dispatch((0, _actions.setQuestion)(evt.target.id));
+	    },
+	    onClickQuestion: function onClickQuestion(evt) {
+	      console.log(props.newQuestion);
+	    },
+	    onChangeTitle: function onChangeTitle(evt) {
+	      dispatch((0, _actions.changeTitle)(evt.target.value));
+	    },
+	    onChangeContent: function onChangeContent(evt) {
+	      dispatch((0, _actions.changeContent)(evt.target.value));
 	    }
 	  };
 	};
@@ -29472,7 +29514,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29524,7 +29566,7 @@
 	});
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29543,7 +29585,10 @@
 	  displayName: "AddQuestion",
 	
 	  props: {
-	    onClickQuestion: _react2.default.PropTypes.func.isRequired
+	    newQuestion: _react2.default.PropTypes.object.isRequired,
+	    onClickQuestion: _react2.default.PropTypes.func.isRequired,
+	    onChangeTitle: _react2.default.PropTypes.func.isRequired,
+	    onChangeContent: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -29554,11 +29599,19 @@
 	        null,
 	        _react2.default.createElement(
 	          "label",
-	          { htmlFor: "question" },
-	          "Add a question"
+	          { htmlFor: "title" },
+	          "Title"
 	        ),
 	        _react2.default.createElement("br", null),
-	        _react2.default.createElement("textarea", { type: "text", name: "question" }),
+	        _react2.default.createElement("input", { name: "title", value: this.props.newQuestion.title, onChange: this.props.onChangeTitle }),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "label",
+	          { htmlFor: "content" },
+	          "Question details"
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement("textarea", { type: "text", name: "content", value: this.props.newQuestion.content, onChange: this.props.onChangeContent }),
 	        _react2.default.createElement("br", null),
 	        _react2.default.createElement(
 	          "button",
@@ -29571,24 +29624,69 @@
 	});
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
-	module.exports = {
-	  setQuestion: setQuestion
-	};
-	
-	function setQuestion(id) {
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.addQuestion = addQuestion;
+	var setQuestion = exports.setQuestion = function setQuestion(id) {
 	  return {
 	    type: 'SET_QUESTION',
 	    id: id
 	  };
+	};
+	
+	var setQuestions = exports.setQuestions = function setQuestions(questions) {
+	  return {
+	    type: 'SET_QUESTIONS',
+	    questions: questions
+	  };
+	};
+	
+	var changeTitle = exports.changeTitle = function changeTitle(title) {
+	  return {
+	    type: 'SET_TITLE',
+	    title: title
+	  };
+	};
+	
+	var changeContent = exports.changeContent = function changeContent(content) {
+	  return {
+	    type: 'SET_CONTENT',
+	    content: content
+	  };
+	};
+	
+	var retrieveQuestions = exports.retrieveQuestions = function retrieveQuestions() {
+	  return function (dispatch) {
+	    request.get('http://s2pid-kweschinz.herokuapp.com/v1/questions').end(function (err, res) {
+	      if (err) {
+	        console.error(err.message);
+	        return;
+	      }
+	      dispatch(setQuestions(res));
+	    });
+	  };
+	};
+	
+	function addQuestion(question) {
+	  return function (dispatch) {
+	    request.post('http://s2pid-kweschinz.herokuapp.com/v1/questions').send(question).set('Accept', 'application/json').end(function (err, res) {
+	      if (err) {
+	        console.error(err.message);
+	        return;
+	      }
+	      dispatch(retrieveQuestions());
+	    });
+	  };
 	}
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29597,7 +29695,7 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(274);
+	var _QuestionDetails = __webpack_require__(275);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
@@ -29617,7 +29715,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29630,7 +29728,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(275);
+	var _Question = __webpack_require__(276);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
@@ -29648,7 +29746,7 @@
 	});
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
