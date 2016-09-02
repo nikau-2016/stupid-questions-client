@@ -1,5 +1,6 @@
 import React from 'react'
 import Question from './Question'
+import Answer from './Answer'
 
 export default React.createClass({
   props: {
@@ -7,7 +8,10 @@ export default React.createClass({
   },
   render () {
     return (
-      <Question question={this.props.question} />
+      <div>
+        <Question question={this.props.question} />
+        <Answer answers={this.props.question.answers} />
+      </div>
     )
   }
 })

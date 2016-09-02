@@ -2,7 +2,7 @@ import React from 'react'
 import QuestionList from '../components/QuestionList'
 import AddQuestion from '../components/AddQuestion'
 import {connect} from 'react-redux'
-import {setQuestion, changeTitle, changeContent, addNewQuestion, retrieveQuestions} from '../actions'
+import {fetchAnswers, setQuestion, changeTitle, changeContent, addNewQuestion, retrieveQuestions} from '../actions'
 
 const Home = (props) => {
   return (
@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onLinkClick: (evt) => {
       dispatch(setQuestion(evt.target.id))
+      dispatch(fetchAnswers(evt.target.id))
     },
     onClickQuestion: (evt) => {
       dispatch(addNewQuestion())
