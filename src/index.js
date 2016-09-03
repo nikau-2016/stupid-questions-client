@@ -9,11 +9,14 @@ import reducers from './reducers'
 import Header from './components/Header'
 import Home from './containers/Home'
 import QuestionDetailsContainer from './containers/QuestionDetailsContainer'
+import {retrieveQuestions} from './actions'
 
 let store = createStore(reducers, compose(
   applyMiddleware(thunkMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
+
+store.dispatch(retrieveQuestions())
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

@@ -68,23 +68,27 @@
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _Header = __webpack_require__(261);
+	var _Header = __webpack_require__(263);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Home = __webpack_require__(262);
+	var _Home = __webpack_require__(264);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _QuestionDetailsContainer = __webpack_require__(271);
+	var _QuestionDetailsContainer = __webpack_require__(273);
 	
 	var _QuestionDetailsContainer2 = _interopRequireDefault(_QuestionDetailsContainer);
+	
+	var _actions = __webpack_require__(267);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
 	  return f;
 	}));
+	
+	store.dispatch((0, _actions.retrieveQuestions)());
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  _reactDom2.default.render(_react2.default.createElement(
@@ -28615,15 +28619,23 @@
 	
 	var _redux = __webpack_require__(172);
 	
-	var _questions = __webpack_require__(258);
+	var _error = __webpack_require__(258);
+	
+	var _error2 = _interopRequireDefault(_error);
+	
+	var _questions = __webpack_require__(259);
 	
 	var _questions2 = _interopRequireDefault(_questions);
 	
-	var _question = __webpack_require__(259);
+	var _question = __webpack_require__(260);
 	
 	var _question2 = _interopRequireDefault(_question);
 	
-	var _newQuestion = __webpack_require__(260);
+	var _newAnswer = __webpack_require__(261);
+	
+	var _newAnswer2 = _interopRequireDefault(_newAnswer);
+	
+	var _newQuestion = __webpack_require__(262);
 	
 	var _newQuestion2 = _interopRequireDefault(_newQuestion);
 	
@@ -28632,11 +28644,35 @@
 	exports.default = (0, _redux.combineReducers)({
 	  questions: _questions2.default,
 	  question: _question2.default,
-	  newQuestion: _newQuestion2.default
+	  newAnswer: _newAnswer2.default,
+	  newQuestion: _newQuestion2.default,
+	  error: _error2.default
 	});
 
 /***/ },
 /* 258 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'RETRIEVAL_ERROR':
+	      return action.error;
+	    default:
+	      return state;
+	  }
+	};
+
+/***/ },
+/* 259 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28658,7 +28694,7 @@
 	};
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28668,23 +28704,48 @@
 	});
 	
 	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? { answers: [] } : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case 'SET_QUESTION':
-	      return Object.assign({}, state, { id: action.id });
-	
-	    case 'RECEIVE_ANSWERS':
-	      return Object.assign({}, state, { answers: action.answers });
-	
+	      return action.id;
 	    default:
 	      return state;
 	  }
 	};
 
 /***/ },
-/* 260 */
+/* 261 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'SET_ANSWER_QUESTION_ID':
+	      return Object.assign({}, state, { question_id: action.id });
+	    case 'SET_ANSWER_CONTENT':
+	      return Object.assign({}, state, { content: action.content });
+	    default:
+	      return state;
+	  }
+	};
+	
+	var initialState = {
+	  question_id: 0,
+	  content: ''
+	};
+
+/***/ },
+/* 262 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28715,7 +28776,7 @@
 	};
 
 /***/ },
-/* 261 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28757,7 +28818,7 @@
 	});
 
 /***/ },
-/* 262 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28770,17 +28831,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _QuestionList = __webpack_require__(263);
+	var _QuestionList = __webpack_require__(265);
 	
 	var _QuestionList2 = _interopRequireDefault(_QuestionList);
 	
-	var _AddQuestion = __webpack_require__(264);
+	var _AddQuestion = __webpack_require__(266);
 	
 	var _AddQuestion2 = _interopRequireDefault(_AddQuestion);
 	
 	var _reactRedux = __webpack_require__(186);
 	
-	var _actions = __webpack_require__(265);
+	var _actions = __webpack_require__(267);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28788,15 +28849,25 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_AddQuestion2.default, { newQuestion: props.newQuestion, onClickQuestion: props.onClickQuestion, onChangeTitle: props.onChangeTitle, onChangeContent: props.onChangeContent }),
-	    _react2.default.createElement(_QuestionList2.default, { questions: props.questions, onLinkClick: props.onLinkClick, getInitialQuestions: props.getInitialQuestions })
+	    _react2.default.createElement(_AddQuestion2.default, {
+	      newQuestion: props.newQuestion,
+	      onClickQuestion: props.onClickQuestion,
+	      onChangeTitle: props.onChangeTitle,
+	      onChangeContent: props.onChangeContent,
+	      error: props.error }),
+	    _react2.default.createElement(_QuestionList2.default, {
+	      questions: props.questions,
+	      onLinkClick: props.onLinkClick,
+	      getInitialQuestions: props.getInitialQuestions,
+	      error: props.error })
 	  );
 	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    questions: state.questions,
-	    newQuestion: state.newQuestion
+	    newQuestion: state.newQuestion,
+	    error: state.error
 	  };
 	};
 	
@@ -28804,7 +28875,7 @@
 	  return {
 	    onLinkClick: function onLinkClick(evt) {
 	      dispatch((0, _actions.setQuestion)(evt.target.id));
-	      dispatch((0, _actions.fetchAnswers)(evt.target.id));
+	      dispatch((0, _actions.setAnswerId)(evt.target.id));
 	    },
 	    onClickQuestion: function onClickQuestion(evt) {
 	      dispatch((0, _actions.addNewQuestion)());
@@ -28824,7 +28895,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ },
-/* 263 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28847,7 +28918,8 @@
 	  props: {
 	    questions: _react2.default.PropTypes.array.isRequired,
 	    onLinkClick: _react2.default.PropTypes.func.isRequired,
-	    getInitialQuestions: _react2.default.PropTypes.func.isRequired
+	    getInitialQuestions: _react2.default.PropTypes.func.isRequired,
+	    error: _react2.default.PropTypes.string.isRequired
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.props.getInitialQuestions();
@@ -28874,13 +28946,20 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'question-list' },
-	      questionList
+	      questionList,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        ' ',
+	        this.props.error,
+	        ' '
+	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 264 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28900,6 +28979,7 @@
 	
 	  props: {
 	    newQuestion: _react2.default.PropTypes.object.isRequired,
+	    error: _react2.default.PropTypes.string.isRequired,
 	    onClickQuestion: _react2.default.PropTypes.func.isRequired,
 	    onChangeTitle: _react2.default.PropTypes.func.isRequired,
 	    onChangeContent: _react2.default.PropTypes.func.isRequired
@@ -28932,13 +29012,20 @@
 	          { type: "button", onClick: this.props.onClickQuestion },
 	          "Add question"
 	        )
+	      ),
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        " ",
+	        this.props.error,
+	        " "
 	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28946,11 +29033,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.retrieveQuestions = exports.receiveAnswers = exports.clearNewQuestion = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.setQuestion = undefined;
-	exports.fetchAnswers = fetchAnswers;
+	exports.setAnswerId = exports.setAnswerContent = exports.retrieveQuestions = exports.retrievalError = exports.clearNewQuestion = exports.changeContent = exports.changeTitle = exports.setQuestions = exports.sendAnswer = exports.setQuestion = undefined;
 	exports.addNewQuestion = addNewQuestion;
 	
-	var _superagent = __webpack_require__(266);
+	var _superagent = __webpack_require__(268);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -28960,6 +29046,20 @@
 	  return {
 	    type: 'SET_QUESTION',
 	    id: id
+	  };
+	};
+	
+	var sendAnswer = exports.sendAnswer = function sendAnswer() {
+	  return function (dispatch, getState) {
+	    var answer = Object.assign({}, getState().newAnswer, { created: 'FAKE DATE' });
+	    _superagent2.default.post('http://localhost:3000/v1/questions/' + answer.question_id + '/answers').send(answer).end(function (err, res) {
+	      if (err) {
+	        console.log(err);
+	        return;
+	      }
+	      console.log('Answer has been sent to server');
+	      // dispatch to set the list of answers
+	    });
 	  };
 	};
 	
@@ -28983,15 +29083,16 @@
 	    content: content
 	  };
 	};
+	
 	var clearNewQuestion = exports.clearNewQuestion = function clearNewQuestion(content) {
 	  return {
 	    type: 'CLEAR_NEW_QUESTION'
 	  };
 	};
-	var receiveAnswers = exports.receiveAnswers = function receiveAnswers(answers) {
+	var retrievalError = exports.retrievalError = function retrievalError(error) {
 	  return {
-	    type: 'RECEIVE_ANSWERS',
-	    answers: answers
+	    type: 'RETRIEVAL_ERROR',
+	    error: error
 	  };
 	};
 	
@@ -28999,7 +29100,7 @@
 	  return function (dispatch) {
 	    _superagent2.default.get('http://localhost:3000/v1/questions').end(function (err, res) {
 	      if (err) {
-	        console.error(err.message);
+	        dispatch(retrievalError(err.message));
 	        return;
 	      }
 	      dispatch(setQuestions(res.body.data));
@@ -29007,26 +29108,26 @@
 	  };
 	};
 	
-	function fetchAnswers(id) {
-	  return function (dispatch) {
-	
-	    _superagent2.default.get('http://localhost:3000/v1/questions/' + id + '/answers').end(function (err, res) {
-	      if (err) {
-	        console.error(err.message);
-	        return;
-	      }
-	      console.log(res.body.data);
-	      dispatch(receiveAnswers(res.body.data));
-	    });
+	var setAnswerContent = exports.setAnswerContent = function setAnswerContent(content) {
+	  return {
+	    type: 'SET_ANSWER_CONTENT',
+	    content: content
 	  };
-	}
+	};
+	
+	var setAnswerId = exports.setAnswerId = function setAnswerId(id) {
+	  return {
+	    type: 'SET_ANSWER_QUESTION_ID',
+	    id: id
+	  };
+	};
 	
 	function addNewQuestion() {
 	  return function (dispatch, getState) {
 	    var newQuestion = Object.assign({}, getState().newQuestion, { created: 'FAKE DATE' });
 	    _superagent2.default.post('http://localhost:3000/v1/questions').send(newQuestion).set('Accept', 'application/json').end(function (err, res) {
 	      if (err) {
-	        console.error(err.message);
+	        dispatch(retrievalError(err.message));
 	        return;
 	      }
 	      dispatch(retrieveQuestions());
@@ -29036,7 +29137,7 @@
 	}
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29053,9 +29154,9 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(267);
-	var requestBase = __webpack_require__(268);
-	var isObject = __webpack_require__(269);
+	var Emitter = __webpack_require__(269);
+	var requestBase = __webpack_require__(270);
+	var isObject = __webpack_require__(271);
 	
 	/**
 	 * Noop.
@@ -29067,7 +29168,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(270).bind(null, Request);
+	var request = module.exports = __webpack_require__(272).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -30018,7 +30119,7 @@
 
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30187,13 +30288,13 @@
 
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(269);
+	var isObject = __webpack_require__(271);
 	
 	/**
 	 * Clear previous timeout.
@@ -30540,7 +30641,7 @@
 
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports) {
 
 	/**
@@ -30559,7 +30660,7 @@
 
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -30597,7 +30698,7 @@
 
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30606,28 +30707,40 @@
 	  value: true
 	});
 	
-	var _QuestionDetails = __webpack_require__(272);
+	var _QuestionDetails = __webpack_require__(274);
 	
 	var _QuestionDetails2 = _interopRequireDefault(_QuestionDetails);
 	
 	var _reactRedux = __webpack_require__(186);
 	
+	var _actions = __webpack_require__(267);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  var question = state.questions.find(function (elem) {
-	    return String(elem.id) === state.question.id;
+	    return String(elem.id) === state.question;
 	  });
-	  question.answers = state.question.answers;
 	  return {
 	    question: question
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_QuestionDetails2.default);
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onChangeAnswer: function onChangeAnswer(evt) {
+	      dispatch((0, _actions.setAnswerContent)(evt.target.value));
+	    },
+	    onClickSubmitAnswer: function onClickSubmitAnswer() {
+	      dispatch((0, _actions.sendAnswer)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_QuestionDetails2.default);
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30640,13 +30753,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Question = __webpack_require__(273);
+	var _Question = __webpack_require__(275);
 	
 	var _Question2 = _interopRequireDefault(_Question);
 	
-	var _Answer = __webpack_require__(274);
+	var _AnswerSubmit = __webpack_require__(276);
 	
-	var _Answer2 = _interopRequireDefault(_Answer);
+	var _AnswerSubmit2 = _interopRequireDefault(_AnswerSubmit);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30654,20 +30767,22 @@
 	  displayName: 'QuestionDetails',
 	
 	  props: {
-	    question: _react2.default.PropTypes.object.isRequired
+	    question: _react2.default.PropTypes.object.isRequired,
+	    onChangeAnswer: _react2.default.PropTypes.func.isRequired,
+	    onClickSubmitAnswer: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(_Question2.default, { question: this.props.question }),
-	      _react2.default.createElement(_Answer2.default, { answers: this.props.question.answers })
+	      _react2.default.createElement(_AnswerSubmit2.default, { onClickSubmitAnswer: this.props.onClickSubmitAnswer, onChangeAnswer: this.props.onChangeAnswer })
 	    );
 	  }
 	});
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30714,13 +30829,13 @@
 	});
 
 /***/ },
-/* 274 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(1);
@@ -30730,33 +30845,35 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _react2.default.createClass({
-	    displayName: "Answer",
+	  displayName: "AnswerSubmit",
 	
-	    props: {
-	        answers: _react2.default.PropTypes.array.isRequired
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { className: "answer" },
-	            this.props.answers.map(function (answer) {
-	                return _react2.default.createElement(
-	                    "div",
-	                    { key: answer.id },
-	                    _react2.default.createElement(
-	                        "p",
-	                        { className: "answer-created" },
-	                        answer.created
-	                    ),
-	                    _react2.default.createElement(
-	                        "p",
-	                        { className: "answer-content" },
-	                        answer.content
-	                    )
-	                );
-	            })
-	        );
-	    }
+	  props: {
+	    onClickSubmitAnswer: _react2.default.PropTypes.func.isRequired,
+	    onChangeAnswer: _react2.default.PropTypes.func.isRequired
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "answer-submit" },
+	      _react2.default.createElement(
+	        "form",
+	        null,
+	        _react2.default.createElement(
+	          "label",
+	          { htmlFor: "answer" },
+	          "Answer a question"
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement("textarea", { type: "text", name: "question", onChange: this.props.onChangeAnswer }),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "button",
+	          { type: "button", onClick: this.props.onClickSubmitAnswer },
+	          "Answer a question"
+	        )
+	      )
+	    );
+	  }
 	});
 
 /***/ }

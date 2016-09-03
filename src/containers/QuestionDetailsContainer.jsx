@@ -1,5 +1,6 @@
 import QuestionDetails from '../components/QuestionDetails'
 import {connect} from 'react-redux'
+import {setAnswerContent, sendAnswer} from '../actions'
 
 const mapStateToProps = (state) => {
   let question = state.questions.find(elem => {
@@ -11,4 +12,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(QuestionDetails)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeAnswer: (evt) => {
+      dispatch(setAnswerContent(evt.target.value))
+    },
+    onClickSubmitAnswer: () => {
+      dispatch(sendAnswer())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails)
