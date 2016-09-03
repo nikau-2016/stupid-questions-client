@@ -18,9 +18,7 @@ export const sendAnswer = () => {
           console.log(err)
           return
         }
-        console.log('Answer has been sent to server')
-        // dispatch to set the list of answers
-    })
+      })
   }
 }
 
