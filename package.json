@@ -4,11 +4,11 @@
   "description": "No question too stupid.",
   "main": "index.js",
   "scripts": {
-    "test": "tape 'tests/**/*.test.js' -r babel-register | tap-spec",
-    "start": "nodemon ./src/server/index.js",
     "build": "webpack ./src/public/bundle.js --watch",
     "devserver": "webpack-dev-server --hot --inline",
-    "server": "node ./src/server/index.js"
+    "start": "nodemon ./src/server/index.js",
+    "test": "tape 'tests/**/*.test.js' -r babel-register | tap-spec",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
