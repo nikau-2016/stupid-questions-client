@@ -50,6 +50,12 @@ export const clearNewQuestion = (content) => {
     type: 'CLEAR_NEW_QUESTION'
   }
 }
+
+export const receiveAnswers = (answers) => {
+  return {
+    type: 'RECEIVE_ANSWERS',
+    answers
+
 export const retrievalError = (error) => {
   return {
     type: 'RETRIEVAL_ERROR',
@@ -68,6 +74,22 @@ export const retrieveQuestions = () => {
         }
         dispatch(setQuestions(res.body.data))
       })
+  }
+}
+
+export function fetchAnswers (id) {
+  return (dispatch) => {
+
+    request
+    .get(`http://localhost:3000/v1/questions/${id}/answers`)
+    .end((err, res) => {
+      if (err) {
+        console.error(err.message)
+        return
+      }
+      console.log(res.body.data)
+      dispatch(receiveAnswers(res.body.data))
+    })
   }
 }
 
