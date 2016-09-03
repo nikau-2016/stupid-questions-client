@@ -66,7 +66,7 @@ export const retrievalError = (error) => {
 export const retrieveQuestions = () => {
   return (dispatch) => {
     request
-      .get(`http://localhost:3000/v1/questions`)
+      .get('http://localhost:3000/v1/questions')
       .end((err, res) => {
         if (err) {
           dispatch(retrievalError(err.message))
@@ -79,7 +79,6 @@ export const retrieveQuestions = () => {
 
 export function fetchAnswers (id) {
   return (dispatch) => {
-
     request
     .get(`http://localhost:3000/v1/questions/${id}/answers`)
     .end((err, res) => {
@@ -111,7 +110,7 @@ export function addNewQuestion () {
   return (dispatch, getState) => {
     const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
-      .post(`http://localhost:3000/v1/questions`)
+      .post('http://localhost:3000/v1/questions')
       .send(newQuestion)
       .set('Accept', 'application/json')
       .end((err, res) => {
