@@ -55,6 +55,8 @@ export const receiveAnswers = (answers) => {
   return {
     type: 'RECEIVE_ANSWERS',
     answers
+  }
+}
 
 export const retrievalError = (error) => {
   return {
@@ -93,14 +95,14 @@ export function fetchAnswers (id) {
   }
 }
 
-export  const setAnswerContent = (content) => {
+export const setAnswerContent = (content) => {
   return {
     type: 'SET_ANSWER_CONTENT',
     content: content
   }
 }
 
-export  const setAnswerId = (id) => {
+export const setAnswerId = (id) => {
   return {
     type: 'SET_ANSWER_QUESTION_ID',
     id: id
