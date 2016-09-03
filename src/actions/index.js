@@ -1,34 +1,5 @@
 import request from 'superagent'
 
-export const setQuestion = (id) => {
-  return {
-    type: 'SET_QUESTION',
-    id
-  }
-}
-
-export const sendAnswer = () => {
-  return (dispatch, getState) => {
-    var answer = Object.assign({}, getState().newAnswer, {created: 'FAKE DATE'})
-    request
-      .post('http://localhost:3000/v1/questions/' + answer.question_id + '/answers')
-      .send(answer)
-      .end((err, res) => {
-        if (err) {
-          console.log(err)
-          return
-        }
-      })
-  }
-}
-
-export const setQuestions = (questions) => {
-  return {
-    type: 'SET_QUESTIONS',
-    questions: questions
-  }
-}
-
 export const changeTitle = (title) => {
   return {
     type: 'SET_TITLE',
@@ -63,35 +34,6 @@ export const retrievalError = (error) => {
   }
 }
 
-export const retrieveQuestions = () => {
-  return (dispatch) => {
-    request
-      .get('http://localhost:3000/v1/questions')
-      .end((err, res) => {
-        if (err) {
-          dispatch(retrievalError(err.message))
-          return
-        }
-        dispatch(setQuestions(res.body.data))
-      })
-  }
-}
-
-export function fetchAnswers (id) {
-  return (dispatch) => {
-    request
-    .get(`http://localhost:3000/v1/questions/${id}/answers`)
-    .end((err, res) => {
-      if (err) {
-        console.error(err.message)
-        return
-      }
-      console.log(res.body.data)
-      dispatch(receiveAnswers(res.body.data))
-    })
-  }
-}
-
 export const setAnswerContent = (content) => {
   return {
     type: 'SET_ANSWER_CONTENT',
@@ -106,7 +48,21 @@ export const setAnswerId = (id) => {
   }
 }
 
-export function addNewQuestion () {
+export const setQuestion = (id) => {
+  return {
+    type: 'SET_QUESTION',
+    id
+  }
+}
+
+export const setQuestions = (questions) => {
+  return {
+    type: 'SET_QUESTIONS',
+    questions: questions
+  }
+}
+
+export const addNewQuestion = () => {
   return (dispatch, getState) => {
     const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
@@ -120,6 +76,50 @@ export function addNewQuestion () {
         }
         dispatch(retrieveQuestions())
         dispatch(clearNewQuestion())
+      })
+  }
+}
+
+export const fetchAnswers = id => {
+  return (dispatch) => {
+    request
+    .get('http://localhost:3000/v1/questions/${id}/answers')
+    .end((err, res) => {
+      if (err) {
+        console.error(err.message)
+        return
+      }
+      console.log(res.body.data)
+      dispatch(receiveAnswers(res.body.data))
+    })
+  }
+}
+
+export const retrieveQuestions = () => {
+  return (dispatch) => {
+    request
+      .get('http://localhost:3000/v1/questions')
+      .end((err, res) => {
+        if (err) {
+          dispatch(retrievalError(err.message))
+          return
+        }
+        dispatch(setQuestions(res.body.data))
+      })
+  }
+}
+
+export const sendAnswer = () => {
+  return (dispatch, getState) => {
+    var answer = Object.assign({}, getState().newAnswer, {created: 'FAKE DATE'})
+    request
+      .post('http://localhost:3000/v1/questions/' + answer.question_id + '/answers')
+      .send(answer)
+      .end((err, res) => {
+        if (err) {
+          console.log(err)
+          return
+        }
       })
   }
 }
