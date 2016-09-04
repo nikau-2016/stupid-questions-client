@@ -22,6 +22,17 @@ const Home = (props) => {
   )
 }
 
+Home.propTypes = {
+  questions: React.PropTypes.array.isRequired,
+  newQuestion: React.PropTypes.object.isRequired,
+  error: React.PropTypes.string.isRequired,
+  onLinkClick: React.PropTypes.func.isRequired,
+  onClickQuestion: React.PropTypes.func.isRequired,
+  onChangeTitle: React.PropTypes.func.isRequired,
+  onChangeContent: React.PropTypes.func.isRequired,
+  getInitialQuestions: React.PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
   return {
     questions: state.questions,
