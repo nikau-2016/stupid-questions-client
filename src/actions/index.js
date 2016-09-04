@@ -116,8 +116,8 @@ export const sendAnswer = () => {
   return (dispatch, getState) => {
     var answer = Object.assign({}, getState().newAnswer, {created: 'FAKE DATE'})
     request
-      .post(`${url}v1/questions`)
-      .send(newQuestion)
+      .post(`${url}v1/questions/${answer.question_id}/answers`)
+      .send(answer)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
