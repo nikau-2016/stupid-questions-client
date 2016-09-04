@@ -12,7 +12,7 @@ export default React.createClass({
   render () {
     return (
       <div>
-        <Question questionDetails={this.props.question} />
+        <Question questionDetails={this.props.questionDetails} />
         <AnswerSubmit onClickSubmitAnswer={this.props.onClickSubmitAnswer} onChangeAnswer={this.props.onChangeAnswer} />
         <Answer answers={this.props.question.answers} />
       </div>

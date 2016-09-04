@@ -9,9 +9,7 @@ const mapStateToProps = (state) => {
 
   return {
     question: state.question,
-    questionDetails: questionDetails,
-    answers: state.question.answers
-
+    questionDetails: questionDetails
   }
 }
 
