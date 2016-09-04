@@ -9,6 +9,7 @@ Client: Kamon, Mandy, Jana
 Server: Erwin, Sach, Siobhan
 Full-stack: Justin, Prem
 <enter>
+
 ##Creating seed dummy Data- Client side
 <ul>
 1.Created Seed dummy data for asking a question and viewing its contents:</li>
