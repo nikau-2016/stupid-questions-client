@@ -3,12 +3,15 @@ import {connect} from 'react-redux'
 import {setAnswerContent, sendAnswer} from '../actions'
 
 const mapStateToProps = (state) => {
-  let question = state.questions.find(elem => {
+  let questionDetails = state.questions.find(elem => {
     return String(elem.id) === state.question.id
   })
-  question.answers = state.question.answers
+
   return {
-    question
+    question: state.question,
+    questionDetails: questionDetails,
+    answers: state.question.answers
+
   }
 }
 
