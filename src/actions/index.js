@@ -66,19 +66,6 @@ export const clearQuestionForm = (content) => {
   }
 }
 
-export const fetchAnswers = id => {
-  return (dispatch) => {
-    request
-    .get(`http://localhost:3000/v1/questions/${id}/answers`)
-    .end((err, res) => {
-      if (err) {
-        dispatch(retrievalError(err.message))
-        return
-      }
-      dispatch(receiveAnswers(res.body.data))
-    })
-  }
-}
 
 export const fetchQuestions = () => {
   return (dispatch) => {
@@ -119,15 +106,14 @@ export const addNewAnswer = () => {
 export const fetchAnswers = (id) => {
   return (dispatch) => {
     request
-      .get('http://localhost:3000/v1/questions/${id}/answers')
-      .end((err, res) => {
-        if (err) {
-          console.error(err.message)
-          return
-        }
-        console.log(res.body.data)
-        dispatch(setAnswers(res.body.data))
-      })
+    .get(`http://localhost:3000/v1/questions/${id}/answers`)
+    .end((err, res) => {
+      if (err) {
+        dispatch(retrievalError(err.message))
+        return
+      }
+      dispatch(setAnswers(res.body.data))
+    })
   }
 }
 
