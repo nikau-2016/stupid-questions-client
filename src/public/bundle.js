@@ -29277,7 +29277,7 @@
 /* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29290,6 +29290,9 @@
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var env = process.env.NODE_ENV || 'development';
+	var url = env === 'production' ? 'http://s2pid-kweschinz.herokuapp.com/' : 'http://localhost:3000/';
 	
 	var setQuestion = exports.setQuestion = function setQuestion(id) {
 	  return {
@@ -29332,7 +29335,7 @@
 	
 	var retrieveQuestions = exports.retrieveQuestions = function retrieveQuestions() {
 	  return function (dispatch) {
-	    _superagent2.default.get('http://localhost:3000/v1/questions').end(function (err, res) {
+	    _superagent2.default.get(url + 'v1/questions').end(function (err, res) {
 	      if (err) {
 	        dispatch(retrievalError(err.message));
 	        return;
@@ -29345,7 +29348,7 @@
 	function addNewQuestion() {
 	  return function (dispatch, getState) {
 	    var newQuestion = Object.assign({}, getState().newQuestion, { created: 'FAKE DATE' });
-	    _superagent2.default.post('http://localhost:3000/v1/questions').send(newQuestion).set('Accept', 'application/json').end(function (err, res) {
+	    _superagent2.default.post(url + 'v1/questions').send(newQuestion).set('Accept', 'application/json').end(function (err, res) {
 	      if (err) {
 	        dispatch(retrievalError(err.message));
 	        return;
@@ -29355,6 +29358,7 @@
 	    });
 	  };
 	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 274 */

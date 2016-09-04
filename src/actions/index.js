@@ -1,4 +1,7 @@
 import request from 'superagent'
+const env = process.env.NODE_ENV || 'development'
+const url = env === 'production' ? 'http://s2pid-kweschinz.herokuapp.com/'
+                                    :'http://localhost:3000/'
 
 export const setQuestion = (id) => {
   return {
@@ -42,7 +45,7 @@ export const retrievalError = (error) => {
 export const retrieveQuestions = () => {
   return (dispatch) => {
     request
-      .get(`http://localhost:3000/v1/questions`)
+      .get(`${url}v1/questions`)
       .end((err, res) => {
         if (err) {
           dispatch(retrievalError(err.message))
@@ -57,7 +60,7 @@ export function addNewQuestion () {
   return (dispatch, getState) => {
     const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
-      .post(`http://localhost:3000/v1/questions`)
+      .post(`${url}v1/questions`)
       .send(newQuestion)
       .set('Accept', 'application/json')
       .end((err, res) => {
