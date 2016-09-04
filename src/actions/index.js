@@ -83,7 +83,7 @@ export const addNewQuestion = () => {
 export const fetchAnswers = id => {
   return (dispatch) => {
     request
-    .get('http://localhost:3000/v1/questions/${id}/answers')
+    .get(`http://localhost:3000/v1/questions/${id}/answers`)
     .end((err, res) => {
       if (err) {
         console.error(err.message)
