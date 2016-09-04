@@ -1,4 +1,7 @@
 import request from 'superagent'
+const env = process.env.NODE_ENV || 'development'
+const url = env === 'production' ? 'https://s2pid-kweschinz.herokuapp.com/'
+                                    :'http://localhost:3000/'
 
 export const changeTitle = (title) => {
   return {
@@ -66,7 +69,7 @@ export const addNewQuestion = () => {
   return (dispatch, getState) => {
     const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
     request
-      .post('http://localhost:3000/v1/questions')
+      .post(`${url}v1/questions`)
       .send(newQuestion)
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -83,7 +86,7 @@ export const addNewQuestion = () => {
 export const fetchAnswers = id => {
   return (dispatch) => {
     request
-    .get(`http://localhost:3000/v1/questions/${id}/answers`)
+    .get(`${url}v1/questions/${id}/answers`)
     .end((err, res) => {
       if (err) {
         dispatch(retrievalError(err.message))
@@ -97,7 +100,7 @@ export const fetchAnswers = id => {
 export const retrieveQuestions = () => {
   return (dispatch) => {
     request
-      .get('http://localhost:3000/v1/questions')
+      .get(`${url}v1/questions`)
       .end((err, res) => {
         if (err) {
           dispatch(retrievalError(err.message))
@@ -112,8 +115,9 @@ export const sendAnswer = () => {
   return (dispatch, getState) => {
     var answer = Object.assign({}, getState().newAnswer, {created: 'FAKE DATE'})
     request
-      .post('http://localhost:3000/v1/questions/' + answer.question_id + '/answers')
+      .post(`${url}v1/questions/${answer.question_id}/answers`)
       .send(answer)
+      .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
           dispatch(retrievalError(err.message))
