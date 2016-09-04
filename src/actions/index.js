@@ -86,10 +86,9 @@ export const fetchAnswers = id => {
     .get('http://localhost:3000/v1/questions/${id}/answers')
     .end((err, res) => {
       if (err) {
-        console.error(err.message)
+        dispatch(retrievalError(err.message))
         return
       }
-      console.log(res.body.data)
       dispatch(receiveAnswers(res.body.data))
     })
   }
@@ -117,7 +116,7 @@ export const sendAnswer = () => {
       .send(answer)
       .end((err, res) => {
         if (err) {
-          console.log(err)
+          dispatch(retrievalError(err.message))
           return
         }
       })
