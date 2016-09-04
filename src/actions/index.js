@@ -89,10 +89,9 @@ export const fetchAnswers = id => {
     .get(`${url}v1/questions/${id}/answers`)
     .end((err, res) => {
       if (err) {
-        console.error(err.message)
+        dispatch(retrievalError(err.message))
         return
       }
-      console.log(res.body.data)
       dispatch(receiveAnswers(res.body.data))
     })
   }
@@ -121,7 +120,7 @@ export const sendAnswer = () => {
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
-          console.log(err)
+          dispatch(retrievalError(err.message))
           return
         }
       })
