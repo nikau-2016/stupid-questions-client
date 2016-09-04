@@ -1,6 +1,6 @@
 import React from 'react'
 import Question from './Question'
-import Answer from './Answer'
+import AnswerList from './AnswerList'
 import AnswerSubmit from './AnswerSubmit'
 
 export default React.createClass({
@@ -14,7 +14,7 @@ export default React.createClass({
       <div>
         <Question question={this.props.question} />
         <AnswerSubmit onClickSubmitAnswer={this.props.onClickSubmitAnswer} onChangeAnswer={this.props.onChangeAnswer} />
-        <Answer answers={this.props.question.answers} />
+        <AnswerList answers={this.props.question.answers} />
       </div>
     )
   }
