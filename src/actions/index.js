@@ -66,6 +66,20 @@ export const clearQuestionForm = (content) => {
   }
 }
 
+export const fetchAnswers = id => {
+  return (dispatch) => {
+    request
+    .get(`http://localhost:3000/v1/questions/${id}/answers`)
+    .end((err, res) => {
+      if (err) {
+        dispatch(retrievalError(err.message))
+        return
+      }
+      dispatch(receiveAnswers(res.body.data))
+    })
+  }
+}
+
 export const fetchQuestions = () => {
   return (dispatch) => {
     request
@@ -95,7 +109,7 @@ export const addNewAnswer = () => {
       .send(answer)
       .end((err, res) => {
         if (err) {
-          console.log(err)
+          dispatch(retrievalError(err.message))
           return
         }
       })
