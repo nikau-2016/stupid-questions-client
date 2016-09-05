@@ -12,17 +12,22 @@
 // global.window = doc.defaultView
 //
 // test('AnswerList has answers', (t) => {
-//   const wrapper = shallow(<AnswerList answers={[{
-//     id: 1,
-//     content: "TEST",
-//     created_at: "2016-09-05T21:35:57.024Z"
-//   }]} />)
+//   const wrapper = shallow(
+//     <AnswerList
+//      answers={[{
+//       id: 3,
+//       created_at: "test",
+//       content: "TEST"
+//     }]}
+//     error={''}
 //
+//   />)
+//   console.log(wrapper)
 //   t.equal(wrapper.contains(
-//     <div key={1}>
-//       <p>TEST</p>
-//       <p>2016-09-05T21:35:57.024Z</p>
-//     </div>
+//       <div key={3}>
+//         <p>TEST</p>
+//         <p>test</p>
+//       </div>
 //   ), true)
 //
 //   t.end()
