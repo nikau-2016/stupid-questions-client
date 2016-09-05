@@ -11,17 +11,25 @@ const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
 global.document = doc
 global.window = doc.defaultView
 
+function dummyFunction () {}
+
 test('questionList has question', (t) => {
-  const wrapper = shallow(<QuestionList questions={[{
-    id: 3,
-    title: "Test",
-    content: "TEST",
-    created: 'test'
-  }]} />)
+  const wrapper = shallow(
+    <QuestionList
+      questions={[{
+          id: 3,
+          title: "Test",
+          content: "TEST",
+          created_at: 'test'
+        }]}
+      error={''}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
+      />)
 
   t.equal(wrapper.contains(
     <div key={3}>
-      <Link id={3} onClick={undefined} to='/questiondetails'>Test</Link>
+      <Link id={3} onClick={dummyFunction} to='/questiondetails'>Test</Link>
       <p>test</p>
     </div>
   ), true)
@@ -30,17 +38,21 @@ test('questionList has question', (t) => {
 })
 
 test('questionList has error', (t) => {
-  const wrapper = shallow(<QuestionList
-    error="this is an error"
-    questions={[{
-    id: 3,
-    title: "Test",
-    content: "TEST",
-    created: 'test'
-  }]} />)
+  const wrapper = shallow(
+    <QuestionList
+      error="this is an error"
+      questions={[{
+        id: 3,
+        title: "Test",
+        content: "TEST",
+        created: 'test'
+      }]}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
+      />)
 
   t.equal(wrapper.containsMatchingElement(
-      <p>this is an error</p>
+    <p>this is an error</p>
   ), true)
 
   t.end()
@@ -48,12 +60,18 @@ test('questionList has error', (t) => {
 
 
 test('questionList has class question-list', (t) => {
-  const wrapper = shallow(<QuestionList questions={[{
-    id: 3,
-    title: "Test",
-    content: "TEST",
-    created: 'test'
-  }]} />)
+  const wrapper = shallow(
+    <QuestionList
+      questions={[{
+        id: 3,
+        title: "Test",
+        content: "TEST",
+        created: 'test'
+      }]}
+      error={''}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
+      />)
 
   t.equal(wrapper.is('.question-list'), true)
 
@@ -63,16 +81,18 @@ test('questionList has class question-list', (t) => {
 test('check onLinkClick is called', (t) => {
     const onButtonClick = sinon.spy()
 
-    const wrapper = shallow(<QuestionList
-      error="this is an error"
-      questions={[{
-      id: 3,
-      title: "Test",
-      content: "TEST",
-      created: 'test'
-    }]}
-      onLinkClick={onButtonClick}
-    />)
+    const wrapper = shallow(
+      <QuestionList
+        error="this is an error"
+        questions={[{
+          id: 3,
+          title: "Test",
+          content: "TEST",
+          created: 'test'
+        }]}
+        onLinkClick={onButtonClick}
+        getInitialQuestions={dummyFunction}
+        />)
 
     wrapper.find('Link').simulate('click')
     t.equal(onButtonClick.calledOnce, true)
@@ -91,7 +111,8 @@ test('getInitialQuestions has been called', (t) => {
       content: "TEST",
       created: 'test',
     }]}
-    getInitialQuestions={() => console.log("Hello")}
+    getInitialQuestions={dummyFunction}
+    onLinkClick={dummyFunction}
   />)
 
   t.equal(spy.calledOnce, true)
