@@ -63,7 +63,7 @@ export const addNewQuestion = () => {
   }
 }
 
-export const clearQuestionForm = (content) => {
+export const clearQuestionForm = () => {
   return {
     type: 'CLEAR_NEW_QUESTION'
   }
@@ -102,7 +102,14 @@ export const addNewAnswer = () => {
           dispatch(retrievalError(err.message))
           return
         }
+        dispatch(clearAnswerForm())
       })
+  }
+}
+
+export const clearAnswerForm = () => {
+  return {
+    type: 'CLEAR_NEW_ANSWER'
   }
 }
 
@@ -119,6 +126,7 @@ export const fetchAnswers = (id) => {
     })
   }
 }
+
 
 export const setAnswers = (answers) => {
   return {
