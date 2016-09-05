@@ -4,7 +4,8 @@ import AnswerList from './AnswerList'
 import AnswerSubmit from './AnswerSubmit'
 
 export default React.createClass({
-  props: {
+  propTypes: {
+    question: React.PropTypes.object.isRequired,
     questionDetails: React.PropTypes.object.isRequired,
     onChangeAnswer: React.PropTypes.func.isRequired,
     onClickSubmitAnswer: React.PropTypes.func.isRequired

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default React.createClass({
-    props: {
+    propTypes: {
         answers: React.PropTypes.array.isRequired
     },
     render () {
