@@ -16,7 +16,7 @@ export default React.createClass({
       return (
         <div key={Number(elem.id)}>
           <Link id={elem.id} onClick={this.props.onLinkClick} to='/questiondetails'>{elem.title}</Link>
-          <p>{elem.created}</p>
+          <p>{elem.created_at}</p>
         </div>
       )
     })
