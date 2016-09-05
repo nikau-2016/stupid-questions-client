@@ -1,10 +1,15 @@
 import test from 'tape'
 import React from 'react'
-import {shallow} from 'enzyme'
 import sinon from 'sinon'
+import {shallow, mount} from 'enzyme'
 import {Link} from 'react-router'
+import jsdom from 'jsdom'
 
 import QuestionList from '../../src/components/QuestionList'
+
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
+global.document = doc
+global.window = doc.defaultView
 
 test('questionList has question', (t) => {
   const wrapper = shallow(<QuestionList questions={[{
@@ -74,3 +79,21 @@ test('check onLinkClick is called', (t) => {
 
     t.end()
   })
+
+// test('getInitialQuestions has been called', (t) => {
+//   const wrapper = mount(<QuestionList
+//     error="this is an error"
+//     questions={[{
+//       id: 3,
+//       title: "Test",
+//       content: "TEST",
+//       created: 'test',
+//     }]}
+//     getInitialQuestions={() => console.log("Hello")}
+//   />)
+//
+//   sinon.spy(QuestionList.prototype, 'componentDidMount')
+//   t.equal(QuestionList.prototype.componentDidMount.calledOnce, true)
+//
+//   t.end()
+// })
