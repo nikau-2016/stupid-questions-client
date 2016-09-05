@@ -97,3 +97,22 @@ test('check onLinkClick is called', (t) => {
 //
 //   t.end()
 // })
+
+test('getInitialQuestions has been called', (t) => {
+  const inComponentDidMount = sinon.spy()
+
+  const wrapper = mount(<QuestionList
+    error="this is an error"
+    questions={[{
+      id: 3,
+      title: "Test",
+      content: "TEST",
+      created: 'test',
+    }]}
+    getInitialQuestions={inComponentDidMount}
+  />)
+
+  t.equal(inComponentDidMount.calledOnce, true)
+
+  t.end()
+})
