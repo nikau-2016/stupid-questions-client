@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   })
 
   return {
+    newAnswer: state.newAnswer,
     question: state.question,
     questionDetails: questionDetails
   }

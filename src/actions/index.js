@@ -63,7 +63,7 @@ export const addNewQuestion = () => {
   }
 }
 
-export const clearQuestionForm = (content) => {
+export const clearQuestionForm = () => {
   return {
     type: 'CLEAR_NEW_QUESTION'
   }
@@ -107,6 +107,12 @@ export const addNewAnswer = () => {
   }
 }
 
+export const clearAnswerForm = () => {
+  return {
+    type: 'CLEAR_NEW_ANSWER'
+  }
+}
+
 export const fetchAnswers = (id) => {
   return (dispatch) => {
     request
@@ -120,6 +126,7 @@ export const fetchAnswers = (id) => {
     })
   }
 }
+
 
 export const setAnswers = (answers) => {
   return {
