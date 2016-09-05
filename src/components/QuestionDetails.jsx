@@ -5,6 +5,7 @@ import AnswerSubmit from './AnswerSubmit'
 
 export default React.createClass({
   propTypes: {
+    newAnswer: React.PropTypes.object.isRequired,
     question: React.PropTypes.object.isRequired,
     questionDetails: React.PropTypes.object.isRequired,
     onChangeAnswer: React.PropTypes.func.isRequired,
@@ -14,7 +15,7 @@ export default React.createClass({
     return (
       <div>
         <Question questionDetails={this.props.questionDetails} />
-        <AnswerSubmit onClickSubmitAnswer={this.props.onClickSubmitAnswer} onChangeAnswer={this.props.onChangeAnswer} />
+        <AnswerSubmit newAnswer={this.props.newAnswer} onClickSubmitAnswer={this.props.onClickSubmitAnswer} onChangeAnswer={this.props.onChangeAnswer} />
         <AnswerList answers={this.props.question.answers} />
       </div>
     )
