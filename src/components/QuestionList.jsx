@@ -23,7 +23,7 @@ export default React.createClass({
     return (
       <div className="question-list">
         {questionList}
-        <p> {this.props.error} </p>
+        <p>{this.props.error}</p>
       </div>
     )
   }
