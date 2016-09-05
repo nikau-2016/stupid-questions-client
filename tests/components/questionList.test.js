@@ -22,9 +22,3 @@ test('shallow', (t) => {
 
   t.end()
 })
-
-// test('mount', (t) => {
-//   const wrapper = mount(<QuestionList />)
-//   const fooInner = wrapper.find('.foo-inner')
-//   t.equal(fooInner.is('.foo-inner'), true)
-// })
