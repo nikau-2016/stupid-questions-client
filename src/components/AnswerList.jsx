@@ -10,7 +10,7 @@ export default React.createClass({
                 {
                     this.props.answers.map(answer => (
                         <div key={answer.id}>
-                            <p className="answer-created">{answer.created}</p>
+                            <p className="answer-created">{answer.created_at}</p>
                             <p className="answer-content">{answer.content}</p>
                         </div>
                     ))

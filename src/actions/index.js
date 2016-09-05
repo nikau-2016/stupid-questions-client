@@ -67,7 +67,7 @@ export const setQuestions = (questions) => {
 
 export const addNewQuestion = () => {
   return (dispatch, getState) => {
-    const newQuestion = Object.assign({}, getState().newQuestion, {created: 'FAKE DATE'})
+    const newQuestion = Object.assign({}, getState().newQuestion, {created_at: 'created_at'})
     request
       .post(`${url}v1/questions`)
       .send(newQuestion)
@@ -113,7 +113,7 @@ export const retrieveQuestions = () => {
 
 export const sendAnswer = () => {
   return (dispatch, getState) => {
-    var answer = Object.assign({}, getState().newAnswer, {created: 'FAKE DATE'})
+    var answer = Object.assign({}, getState().newAnswer, {created_at: 'created_at'})
     request
       .post(`${url}v1/questions/${answer.question_id}/answers`)
       .send(answer)
