@@ -103,6 +103,7 @@ export const addNewAnswer = () => {
           return
         }
         dispatch(fetchAnswers(answer.question_id))
+        dispatch(clearAnswerForm())
       })
   }
 }
