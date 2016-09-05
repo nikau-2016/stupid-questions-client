@@ -9,11 +9,10 @@ import {fetchQuestions} from '../../src/actions'
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-// remember to remove 'only' after testing
-test.only('dispatch setQuestions after fetching questions from server', (t) => {
+test('dispatch setQuestions after fetching questions from server', (t) => {
   nock('http://localhost:3000')
     .get('/v1/questions')
-    .reply(200, {body: [{
+    .reply(200, {data: [{
       id: 3,
       title: "Test",
       content: "TEST",
@@ -31,8 +30,10 @@ test.only('dispatch setQuestions after fetching questions from server', (t) => {
       }]
   }]
   const store = mockStore({questions: []})
-
+  const unsubscribe = store.subscribe(() => {
+    t.deepEqual(store.getActions(), expectedActions)
+    t.end()
+    unsubscribe()
+  })
   store.dispatch(fetchQuestions())
-  t.deepEqual(store.getActions(), expectedActions)
-  t.end()
 })
