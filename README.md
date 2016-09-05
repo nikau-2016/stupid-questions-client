@@ -10,6 +10,16 @@ Server: Erwin, Sach, Siobhan
 Full-stack: Justin, Prem
 <enter>
 
+## Build and run client
+
+<pre>
+<code>
+npm run build
+npm start
+</code>
+</pre>
+
+
 # Installation - Client Side
 
 Open the terminal and enter your 'stupid-questions-client' repository.
@@ -33,7 +43,7 @@ npm run server
 ```
 ##Creating seed dummy Data- Client side
 <ul>
-1.Created Seed dummy data for asking a question and viewing its contents:</li>
+1.Created Seed dummy data for asking a question and viewing its contents:
 <li>React Redux</li>
 <li>Can be found in src > reducers folder > initialQuestions </li>
 Example: 
@@ -64,12 +74,3 @@ const initialAnswers= [{
 </pre>
 
 <enter>
-
-## Build and run client
-
-<pre>
-<code>
-npm run build
-npm start
-</code>
-</pre>
