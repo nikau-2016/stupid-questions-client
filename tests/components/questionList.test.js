@@ -11,6 +11,8 @@ const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
 global.document = doc
 global.window = doc.defaultView
 
+function dummyFunction () {}
+
 test('questionList has question', (t) => {
   const wrapper = shallow(
     <QuestionList
@@ -18,16 +20,16 @@ test('questionList has question', (t) => {
           id: 3,
           title: "Test",
           content: "TEST",
-          created: 'test'
+          created_at: 'test'
         }]}
       error={''}
-      onLinkClick={() => {}}
-      getInitialQuestions={() => {}}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
       />)
 
   t.equal(wrapper.contains(
     <div key={3}>
-      <Link id={3} onClick={undefined} to='/questiondetails'>Test</Link>
+      <Link id={3} onClick={dummyFunction} to='/questiondetails'>Test</Link>
       <p>test</p>
     </div>
   ), true)
@@ -45,12 +47,12 @@ test('questionList has error', (t) => {
         content: "TEST",
         created: 'test'
       }]}
-      onLinkClick={() => {}}
-      getInitialQuestions={() => {}}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
       />)
 
   t.equal(wrapper.containsMatchingElement(
-      <p>this is an error</p>
+    <p>this is an error</p>
   ), true)
 
   t.end()
@@ -67,8 +69,8 @@ test('questionList has class question-list', (t) => {
         created: 'test'
       }]}
       error={''}
-      onLinkClick={() => {}}
-      getInitialQuestions={() => {}}
+      onLinkClick={dummyFunction}
+      getInitialQuestions={dummyFunction}
       />)
 
   t.equal(wrapper.is('.question-list'), true)
@@ -89,7 +91,7 @@ test('check onLinkClick is called', (t) => {
           created: 'test'
         }]}
         onLinkClick={onButtonClick}
-        getInitialQuestions={() => {}}
+        getInitialQuestions={dummyFunction}
         />)
 
     wrapper.find('Link').simulate('click')
@@ -109,8 +111,8 @@ test('getInitialQuestions has been called', (t) => {
       content: "TEST",
       created: 'test',
     }]}
-    getInitialQuestions={() => {}}
-    onLinkClick={() => {}}
+    getInitialQuestions={dummyFunction}
+    onLinkClick={dummyFunction}
   />)
 
   t.equal(spy.calledOnce, true)
