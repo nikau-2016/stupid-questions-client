@@ -80,26 +80,8 @@ test('check onLinkClick is called', (t) => {
     t.end()
   })
 
-// test('getInitialQuestions has been called', (t) => {
-//   const wrapper = mount(<QuestionList
-//     error="this is an error"
-//     questions={[{
-//       id: 3,
-//       title: "Test",
-//       content: "TEST",
-//       created: 'test',
-//     }]}
-//     getInitialQuestions={() => console.log("Hello")}
-//   />)
-//
-//   sinon.spy(QuestionList.prototype, 'componentDidMount')
-//   t.equal(QuestionList.prototype.componentDidMount.calledOnce, true)
-//
-//   t.end()
-// })
-
 test('getInitialQuestions has been called', (t) => {
-  const inComponentDidMount = sinon.spy()
+  const spy = sinon.spy(QuestionList.prototype, 'componentDidMount')
 
   const wrapper = mount(<QuestionList
     error="this is an error"
@@ -109,10 +91,10 @@ test('getInitialQuestions has been called', (t) => {
       content: "TEST",
       created: 'test',
     }]}
-    getInitialQuestions={inComponentDidMount}
+    getInitialQuestions={() => console.log("Hello")}
   />)
 
-  t.equal(inComponentDidMount.calledOnce, true)
+  t.equal(spy.calledOnce, true)
 
   t.end()
 })
