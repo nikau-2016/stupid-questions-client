@@ -54,3 +54,23 @@ test('questionList has class question-list', (t) => {
 
   t.end()
 })
+
+test('check onLinkClick is called', (t) => {
+    const onButtonClick = sinon.spy()
+
+    const wrapper = shallow(<QuestionList
+      error="this is an error"
+      questions={[{
+      id: 3,
+      title: "Test",
+      content: "TEST",
+      created: 'test'
+    }]}
+      onLinkClick={onButtonClick}
+    />)
+
+    wrapper.find('Link').simulate('click')
+    t.equal(onButtonClick.calledOnce, true)
+
+    t.end()
+  })
