@@ -102,6 +102,7 @@ export const addNewAnswer = () => {
           dispatch(retrievalError(err.message))
           return
         }
+        dispatch(fetchAnswers(answer.question_id))
         dispatch(clearAnswerForm())
       })
   }
