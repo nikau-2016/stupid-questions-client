@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 
 export default React.createClass({
-  props: {
+  propTypes: {
     questions: React.PropTypes.array.isRequired,
     onLinkClick: React.PropTypes.func.isRequired,
     getInitialQuestions: React.PropTypes.func.isRequired

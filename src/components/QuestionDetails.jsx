@@ -3,7 +3,7 @@ import Question from './Question'
 import Answer from './Answer'
 
 export default React.createClass({
-  props: {
+  propTypes: {
     question: React.PropTypes.object.isRequired
   },
   render () {

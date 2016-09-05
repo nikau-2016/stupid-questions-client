@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default React.createClass({
-  props: {
+  propTypes: {
     newQuestion: React.PropTypes.object.isRequired,
     onClickQuestion: React.PropTypes.func.isRequired,
     onChangeTitle: React.PropTypes.func.isRequired,
