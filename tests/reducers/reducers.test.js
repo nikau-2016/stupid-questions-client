@@ -1,5 +1,5 @@
 import test from 'tape'
-import questions from '../src/reducers/questions'
+import questions from '../../src/reducers/questions'
 
 test('SET_QUESTIONS sets questions when initial state is an empty array', (t) => {
   const initialState = []
@@ -8,13 +8,15 @@ test('SET_QUESTIONS sets questions when initial state is an empty array', (t) =>
     questions: [{
       id: 3,
       title: "Test",
-      content: "TEST"
+      content: "TEST",
+      created: 'test'
     }]
   }
   const expectedState = [{
     id: 3,
     title: "Test",
-    content: "TEST"
+    content: "TEST",
+    created: 'test'
   }]
 
   t.deepEqual(questions(initialState, action), expectedState)
@@ -32,13 +34,15 @@ test('SET_QUESTIONS sets questions when initial state is not empty', (t) => {
     questions: [{
       id: 3,
       title: "Test",
-      content: "TEST"
+      content: "TEST",
+      created: 'test'
     }]
   }
   const expectedState = [{
     id: 3,
     title: "Test",
-    content: "TEST"
+    content: "TEST",
+    created: 'test'
   }]
 
   t.deepEqual(questions(initialState, action), expectedState)
