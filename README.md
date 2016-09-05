@@ -9,6 +9,28 @@ Client: Kamon, Mandy, Jana
 Server: Erwin, Sach, Siobhan
 Full-stack: Justin, Prem
 <enter>
+
+# Installation - Client Side
+
+Open the terminal and enter your 'stupid-questions-client' repository.
+
+Run 'npm i' to install appropriate packages in the package.json:
+
+```
+npm i
+```
+
+Once the packages have been installed, the webpack must be built using 'npm run build'
+
+```
+npm run build
+```
+
+Then open a new tab in the terminal and run the server
+
+```
+npm run server
+```
 ##Creating seed dummy Data- Client side
 <ul>
 1.Created Seed dummy data for asking a question and viewing its contents:</li>
