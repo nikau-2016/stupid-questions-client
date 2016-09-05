@@ -1,11 +1,12 @@
 import test from 'tape'
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import {shallow} from 'enzyme'
+import sinon from 'sinon'
 import {Link} from 'react-router'
 
 import QuestionList from '../../src/components/QuestionList'
 
-test('shallow', (t) => {
+test('questionList has question', (t) => {
   const wrapper = shallow(<QuestionList questions={[{
     id: 3,
     title: "Test",
@@ -19,6 +20,37 @@ test('shallow', (t) => {
       <p>test</p>
     </div>
   ), true)
+
+  t.end()
+})
+
+test('questionList has error', (t) => {
+  const wrapper = shallow(<QuestionList
+    error="this is an error"
+    questions={[{
+    id: 3,
+    title: "Test",
+    content: "TEST",
+    created: 'test'
+  }]} />)
+
+  t.equal(wrapper.containsMatchingElement(
+      <p>this is an error</p>
+  ), true)
+
+  t.end()
+})
+
+
+test('questionList has class question-list', (t) => {
+  const wrapper = shallow(<QuestionList questions={[{
+    id: 3,
+    title: "Test",
+    content: "TEST",
+    created: 'test'
+  }]} />)
+
+  t.equal(wrapper.is('.question-list'), true)
 
   t.end()
 })
