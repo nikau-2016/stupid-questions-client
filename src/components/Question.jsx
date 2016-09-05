@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default React.createClass({
-  props: {
+  propTypes: {
     questionDetails: React.PropTypes.object.isRequired
   },
   render () {
